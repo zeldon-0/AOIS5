@@ -15,6 +15,9 @@ namespace BFS
         public List<Field> Search()
         {
             Field current = _open.First();
+            if (!current.IsSolvable())
+                return new List<Field>();
+
             while (!current.IsSolved())
             {
                 if (current.MoveRightAvailable())

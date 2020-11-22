@@ -1,0 +1,102 @@
+﻿<body>
+  <div class = "container">
+    <span flex>
+      <div class="col-sm-9 col-md-7 col-lg-3 mx-auto">
+        <mat-form-field appearance="fill">
+          <mat-label>Choose the puzzle size</mat-label>
+          <mat-select [formControl]="sizes" (selectionChange)="addTiles()">
+            <mat-select-trigger>
+              {{sizes.value ? sizes.value : ''}}
+            </mat-select-trigger>
+            <mat-option *ngFor="let size of sizeList" [value]="size">{{size}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </span>
+  </div>
+  <div *ngIf = "currentTiles.length==0">
+  <form [formGroup]="form">
+      <div class = "container">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+              <div class="flex">
+                <div *ngIf = "sizes.value==2" class="table-2">
+                  <ng-container formArrayName="tiles" *ngFor="let tile of form.controls.tiles?.value; let i = index; trackBy:trackByFn">
+                    <ng-container [formGroupName]="i">
+                      <input class="tile"  formControlName="tile">
+                    </ng-container>
+                  </ng-container>
+                </div>
+
+                <div *ngIf = "sizes.value==3" class="table-3">
+                  <ng-container formArrayName="tiles" *ngFor="let tile of form.controls.tiles?.value; let i = index; trackBy:trackByFn">
+                    <ng-container [formGroupName]="i">
+                      <input class="tile"  formControlName="tile">
+                    </ng-container>
+                  </ng-container>
+                </div>
+
+                <div *ngIf = "sizes.value==4" class="table-4">
+                  <ng-container formArrayName="tiles" *ngFor="let tile of form.controls.tiles?.value; let i = index; trackBy:trackByFn">
+                    <ng-container [formGroupName]="i">
+                      <input class="tile"  formControlName="tile">
+                    </ng-container>
+                  </ng-container>
+                </div>
+
+                <div *ngIf = "sizes.value==5" class="table-5">
+                  <ng-container formArrayName="tiles" *ngFor="let tile of form.controls.tiles?.value; let i = index; trackBy:trackByFn">
+                    <ng-container [formGroupName]="i">
+                      <input class="tile"  formControlName="tile">
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+          </div>
+      </div>
+  </form>
+  </div>
+  <div *ngIf = "currentTiles.length!=0">
+    <div class = "container">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="flex">
+              <div *ngIf = "sizes.value==2" class="table-2">
+                <ng-container *ngFor="let tile of currentTiles">
+                  <button *ngIf="tile==0" class="tile pointer" >{{tile}}</button>
+                  <button *ngIf="tile!=0" class="tile" >{{tile}}</button>
+                </ng-container>
+              </div>
+                <div *ngIf = "sizes.value==3" class="table-3">
+                  <ng-container *ngFor="let tile of currentTiles">
+                    <button *ngIf="tile==0" class="tile pointer" >{{tile}}</button>
+                    <button *ngIf="tile!=0" class="tile" >{{tile}}</button>
+                  </ng-container>
+                </div>
+
+              <div *ngIf = "sizes.value==4" class="table-4">
+                <ng-container *ngFor="let tile of currentTiles">
+                    <button *ngIf="tile==0" class="tile pointer" >{{tile}}</button>
+                    <button *ngIf="tile!=0" class="tile" >{{tile}}</button>
+                </ng-container>
+              </div>
+              
+                <div *ngIf = "sizes.value==5" class="table-5">
+                  <ng-container *ngFor="let tile of currentTiles">
+                    <button *ngIf="tile==0" class="tile pointer" >{{tile}}</button>> 
+                    <button *ngIf="tile!=0" class="tile" >{{tile}}</button>
+                  </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class = "container">
+    <div class="col-sm-9 col-md-7 col-lg-3 mx-auto" style="padding-left: 50px;">
+      <button (click)="solve()" class="button" mat-stroked-button >Solve the puzzle</button>
+    </div>
+  </div>
+  <div class = "container" *ngIf="errorMessage">
+    <div class="col-sm-9 col-md-7 col-lg-3 mx-auto" style="margin-left: 20px;">
+      <p>{{errorMessage}}</p>
+    </div>
+  </div>
+</body>
